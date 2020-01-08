@@ -12,15 +12,23 @@ function findById(id) {
 
 // function findSteps(id) {}
 
-// function add(scheme) {}
+function add(scheme) {
+  return db('schemes').insert(scheme);
+}
 
 // function update(changes, id) {}
 
-// function remove(id) {}
+function remove(id) {
+  return db('schemes')
+    .where({ id })
+    .del();
+}
 
 module.exports = {
   find,
   findById,
+  add,
+  remove,
 };
 
 // findSteps,
