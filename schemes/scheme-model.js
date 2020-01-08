@@ -10,7 +10,14 @@ function findById(id) {
     .first();
 }
 
-// function findSteps(id) {}
+function findSteps(id) {
+  return db('steps')
+    .join('schemes', 'steps.scheme_id', 'schemes.Id')
+    .select('schemes.scheme_name', 'steps.step_number', 'steps.instructions')
+    .where({scheme_id: id})
+    .orderBy('schemes.scheme_name')
+    .orderBy('step_number');
+}
 
 async function add(scheme) {
   const [id] = await db('schemes').insert(scheme);
@@ -35,10 +42,17 @@ async function remove(id) {
   return removedUser;
 }
 
+async function addStep(data, id) {
+  const stepData = { scheme_id: id, ...data};
+
+  return db('steps').insert(stepData)
+}
+
 module.exports = {
   find,
   findById,
   add,
   remove,
   update,
+  findSteps,
 };
