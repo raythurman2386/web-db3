@@ -54,4 +54,5 @@ module.exports = {
   remove,
   update,
   findSteps,
+  addStep
 };
