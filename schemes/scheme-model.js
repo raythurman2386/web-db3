@@ -12,16 +12,21 @@ function findById(id) {
 
 // function findSteps(id) {}
 
-function add(scheme) {
-  return db('schemes').insert(scheme);
+async function add(scheme) {
+  const [id] = await db('schemes').insert(scheme);
+
+  return findById(id);
 }
 
 // function update(changes, id) {}
 
-function remove(id) {
-  return db('schemes')
+async function remove(id) {
+  const removedUser = await findById(id);
+  await db('schemes')
     .where({ id })
     .del();
+
+  return removedUser;
 }
 
 module.exports = {
