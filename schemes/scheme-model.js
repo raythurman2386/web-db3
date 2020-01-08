@@ -15,7 +15,6 @@ function findSteps(id) {
     .join('schemes', 'steps.scheme_id', 'schemes.Id')
     .select('schemes.scheme_name', 'steps.step_number', 'steps.instructions')
     .where({scheme_id: id})
-    .orderBy('schemes.scheme_name')
     .orderBy('step_number');
 }
 
