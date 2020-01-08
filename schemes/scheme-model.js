@@ -18,7 +18,13 @@ async function add(scheme) {
   return findById(id);
 }
 
-// function update(changes, id) {}
+async function update(changes, id) {
+  await db('schemes')
+    .where({ id })
+    .update(changes);
+
+  return await findById(id);
+}
 
 async function remove(id) {
   const removedUser = await findById(id);
@@ -34,6 +40,7 @@ module.exports = {
   findById,
   add,
   remove,
+  update,
 };
 
 // findSteps,
